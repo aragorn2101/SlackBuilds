@@ -82,4 +82,24 @@ CXXFLAGS="$SLKCFLAGS" \
 
 make -j1
 
+# Install the ds9 executable
+mkdir -p $PKG/usr/{bin,doc/$PRGNAM-$VERSION}
+install -D -m755 bin/ds9 $PKG/usr/bin/
 
+# Install icon
+mkdir -p $PKG/usr/share/applications
+mkdir -p $PKG/usr/share/pixmaps
+install -m 644 $CWD/ds9.desktop $PKG/usr/share/applications
+install -m 644 $CWD/ds9-icon.png $PKG/usr/share/pixmaps
+
+# Copy documentation
+cp -a BUILD.txt LICENSE.txt copyright ds9/doc/* $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+find $PKG/usr/doc/$PRGNAM-$VERSION -type f -exec chmod 644 {} \;
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
