@@ -78,7 +78,7 @@ sed -e '154s@\$(DESTDIR)@/usr@' \
 
 
 # Build executables
-make DESTDIR=$PKG/usr latex2rtf
+CFLAGS=$SLKCFLAGS make DESTDIR=$PKG/usr latex2rtf
 
 # Make documentation
 make DESTDIR=$PKG/usr doc
