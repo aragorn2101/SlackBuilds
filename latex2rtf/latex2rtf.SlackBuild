@@ -76,7 +76,6 @@ sed -e '154s@\$(DESTDIR)@/usr@' \
     -e '157s@\$(DESTDIR)@/usr@' \
     -e '231s@\$(DESTDIR)@/usr@' Makefile.orig > Makefile
 
-
 # Build executables
 CFLAGS=$SLKCFLAGS make DESTDIR=$PKG/usr latex2rtf
 
@@ -89,7 +88,6 @@ make DESTDIR=$PKG/usr install-info
 
 # Fix permission for executable latex2png
 chmod 755 $PKG/usr/bin/latex2png
-
 
 # Compress man pages if they exist
 if [ -d $PKG/usr/share/man ]; then
@@ -104,6 +102,8 @@ if [ -d $PKG/usr/share/info ]; then
   gzip -9 $PKG/usr/share/info/*.info
   rm -f $PKG/usr/share/info/dir
 fi
+
+mv $PKG/usr/share/{man,info} $PKG/usr/
 
 # Copy the rest of documentation
 cp -a ChangeLog Copyright HACKING README $PKG/usr/share/$PRGNAM/

@@ -6,7 +6,7 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-latex2rtf: latex2rtf converter
+latex2rtf: latex2rtf (LaTeX converter)
 latex2rtf:
 latex2rtf: It is a translator for converting LaTeX sources into
 latex2rtf: "Rich Text Format" (RTF), a published standard format by Microsoft.
