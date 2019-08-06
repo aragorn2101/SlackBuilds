@@ -1,0 +1,27 @@
+The NVIDIA® CUDA® Toolkit provides a development environment for creating high
+performance GPU-accelerated applications. With the CUDA Toolkit, you can
+develop, optimize and deploy your applications on GPU-accelerated embedded
+systems, desktop workstations, enterprise data centers, cloud-based platforms
+and HPC supercomputers. The toolkit includes GPU-accelerated libraries,
+debugging and optimization tools, a C/C++ compiler and a runtime library to
+deploy your application.
+
+If the link from the cudatoolkit.info is not working for downloading the
+source, the file can be downloaded from
+<https://developer.nvidia.com/cuda-downloads>
+
+The necessary file to download is under the following specifications:
+Operating System: Linux
+Architecture: x86_64
+Distribution: RHEL
+Version: 7
+Installer Type: runfile (local)
+
+The runfile is 2.4 GiB and the temporary extracted size required is 4.2 GiB.
+The compressed package will take around 2.2 GiB.
+
+This is not an official SlackBuild and has not been tested with the NVIDIA
+driver and kernel module available from SlackBuilds.org. We use /tmp/SBo as the
+default temporary directory but the build tag is "custom". This version of CUDA
+has been tested with driver and kernel module version 430.34 and was found to
+work correctly.

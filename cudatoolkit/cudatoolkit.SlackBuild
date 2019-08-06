@@ -1,0 +1,131 @@
+#!/bin/sh
+
+# Slackware build script for the NVIDIA CUDA Toolkit
+
+# Copyright 2019 Nitish Ragoomundun, Mauritius
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+PRGNAM=cudatoolkit
+FILENAME=cuda
+VERSION=${VERSION:-10.1.168}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_custom}
+
+
+case "$( uname -m )" in
+  i?86) ARCH=i386 ;;
+  arm*) ARCH=arm ;;
+     *) ARCH=$( uname -m ) ;;
+esac
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -e
+
+if [ "$ARCH" = "x86_64" ]; then
+  LIBDIRSUFFIX="64"
+else
+  printf "\n\n$ARCH is not supported... \n"
+  exit 1
+fi
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+rm -rf $TMP/$PRGNAM-$VERSION
+mkdir -p $TMP/$PRGNAM-$VERSION
+
+# Extract cuda
+chmod +x $FILENAME\_$VERSION\_418.67\_linux.run
+./$FILENAME\_$VERSION\_418.67\_linux.run --extract=$TMP/$PRGNAM-$VERSION
+
+cd $TMP/$PRGNAM-$VERSION
+chown -R root:root ./{cublas,cuda-samples,cuda-toolkit}
+
+# Move everything to the cuda directory
+mkdir -p $PKG/usr/share/cuda
+mv -v cuda-toolkit/* $PKG/usr/share/cuda
+
+# Move the docs to our standard location
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+mv -v $PKG/usr/share/cuda/doc/man $PKG/usr
+mv -v $PKG/usr/share/cuda/doc/* $PKG/usr/doc/$PRGNAM-$VERSION
+rm -rf $PKG/usr/share/cuda/doc
+cat ${CWD}/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+# Put libraries in the standard place
+mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
+mv -v $PKG/usr/share/cuda/targets/x86_64-linux/lib/* $PKG/usr/lib${LIBDIRSUFFIX}
+( cd $PKG/usr/share/cuda
+  ln -vsf -T ../../lib${LIBDIRSUFFIX} lib${LIBDIRSUFFIX}
+)
+
+# Put include in the standard place
+mkdir -p $PKG/usr/include/cuda
+mv -v $PKG/usr/share/cuda/targets/x86_64-linux/include/* $PKG/usr/include/cuda
+( cd $PKG/usr/share/cuda
+  ln -vsf -T ../../include/cuda include
+)
+rm -rf $PKG/usr/share/cuda/targets
+
+# Move cuBLAS to its proper location
+mv -v cublas/lib${LIBDIRSUFFIX}/stubs/* $PKG/usr/lib${LIBDIRSUFFIX}/stubs
+rm -rf cublas/lib${LIBDIRSUFFIX}/stubs
+mv -v cublas/lib${LIBDIRSUFFIX}/* $PKG/usr/lib${LIBDIRSUFFIX}
+mv -v cublas/include/* $PKG/usr/include
+mv -v cublas/src/* $PKG/usr/share/cuda/src
+mv -v cublas/cublas_version.txt $PKG/usr/doc/$PRGNAM-$VERSION
+
+# These are already available from the nvidia-driver package
+rm -f $PKG/usr/lib${LIBDIRSUFFIX}/libOpenCL.s*
+
+# /etc/profile.d scripts
+mkdir -p $PKG/etc/profile.d
+cat << EOF > $PKG/etc/profile.d/cuda.sh
+#!/bin/sh
+export PATH=\$PATH:/usr/share/cuda/bin
+EOF
+
+cat << EOF > $PKG/etc/profile.d/cuda.csh
+#!/bin/csh
+setenv PATH \$PATH:/usr/share/cuda/bin
+EOF
+
+chmod 0755 $PKG/etc/profile.d/cuda.{sh,csh}
+
+# Copy .desktop files
+mkdir -p $PKG/usr/share/applications
+cp -v $CWD/{nsight,nvvp}.desktop $PKG/usr/share/applications
+
+# install samples
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA_10.1_Samples
+mv -v cuda-samples/* $PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA_10.1_Samples
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -c n -l y $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
