@@ -13,7 +13,7 @@ Features
 - Conversion of tables
 - Conversion of graphics
 - Conversion of cross-references
-- Conversion of bibliographies 
+- Conversion of bibliographies
 
 latex2rtf translates the text and as much of the formatting information from
 LaTeX to RTF. Be forewarned that the typeset output is not nearly as good as
