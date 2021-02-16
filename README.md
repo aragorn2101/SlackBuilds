@@ -8,7 +8,7 @@ well.
 be found at https://slackbuilds.org
 
 
-## cudatoolkit
+## cudatoolkit 10.1.168
 
 The NVIDIA® CUDA® Toolkit provides a development environment for creating
 high performance GPU-accelerated applications. With the CUDA Toolkit, you can
@@ -19,7 +19,7 @@ debugging and optimization tools, a C/C++ compiler and a runtime library to
 deploy your application.
 
 
-## ds9
+## ds9 8.1
 
 SAOImage DS9 is an application for astronomical imaging and data
 visualization. It supports the FITS format and binary tables. As well as
@@ -29,7 +29,7 @@ manipulation, mosaic images and geometric markers.  DS9 supports a variety of
 coordinate systems and it has a user configurable interface.
 
 
-## karma
+## karma 1.7.25
 
 ATNF CSIRO Karma is a package for signal and image processing
 applications. It contains KarmaLib (the structured library and API)
@@ -50,7 +50,7 @@ This SlackBuild script builds a Slackware package from the official
 binary distributed by CSIRO.
 
 
-## latex2rtf
+## latex2rtf 2.3.17
 
 latex2rtf is a translator program to convert LaTeX formatted text files into
 "rich text format" (RTF) files. RTF is a published standard format by
@@ -74,7 +74,7 @@ LaTeX to RTF. Be forewarned that the typeset output is not nearly as good as
 what you would get from using LaTeX directly.
 
 
-## netcdf-fortran
+## netcdf-fortran 4.5.3
 
 NetCDF (network Common Data Form) is a set of interfaces for array-oriented
 data access and a freely-distributed collection of data access libraries for C,
@@ -88,7 +88,7 @@ accessing netCDF data. It depends on the netCDF C library, which must be
 installed first.
 
 
-## pgplot
+## pgplot 5.2.2
 
 PGPLOT is a Fortran subroutine package for drawing simple scientific
 graphs on various graphics display devices. It was originally developed
@@ -108,7 +108,7 @@ redistributed or placed on public Web servers without permission. The
 software is provided "as is" with no warranty.
 
 
-## wcslib
+## wcslib 5.19.1
 
 WCSLIB is a set of C library routines that implements the World
 Coordinate System (WCS) standard in FITS (Flexible Image Transport

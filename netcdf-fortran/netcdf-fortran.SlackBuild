@@ -80,7 +80,6 @@ CXXFLAGS="$SLKCFLAGS" \
    --mandir=/usr/man \
    --datarootdir=/usr \
    --docdir=/usr/doc/$PRGNAM-$VERSION \
-   --enable-shared=no \
    --enable-static=no \
    --build=$ARCH-slackware-linux
 
