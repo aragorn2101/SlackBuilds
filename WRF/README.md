@@ -8,34 +8,16 @@ We propose installation scripts for WRF ARW (Advanced Research WRF). The source 
 - The other method is the natural way of installing dependencies using SlackBuilds and compile WRF in a custom directory.
 
 
-### install_wrfv3.sh
+## install_wrfv-.sh
 
-This script installs WRF according to the first method listed above. It should be placed in a directory with all the sources of the dependencies and the WPS and WRF source. The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
+The install scripts install WRF according to the first method listed above. The source code for the dependencies, and the source archives for both WRF and WPS should be placed in the same directory as the script. The script is made executable and run. It will set all permissions with respect to the user executing it, and the default installation directory is the home directory of the user, taken from environment variable ${HOME}. To change target directory, execute script as
+```
+$ OUTPUT=CUSTOM_PATH ./install_wrfv[VERSION].sh
+```
 
-- MPICH 3.0.4 : mpich-3.0.4.tar.gz
-[https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
+#### WRF
 
-- netCDF 4.1.3 : netcdf-4.1.3.tar.gz
-[https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
-
-- NCARG 6.6.2 : ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz
-[https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html](https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html)
-
-- udunits 2.2.28 : udunits-2.2.28.tar.gz
-[https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
-
-- Ncview 1.93g : ncview-1.93g.tar.gz
-[http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
-
-- WRF 3.8.1
-[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
-
-- WPS 3.8.1
-[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
-
-__NOTE:__ The source codes for MPICH and netCDF are obtained from the WRF compiling tutorial page. Other dependencies are listed on that page, such as Jasper, libpng and zlib. These packages are already available from the base Slackware system.
-
-WRF is compiled with the dmpar (GNU gfortran/gcc) option. It is option number 34 from the list shown below. This list is obtained by running WRF's internal configure script manually (list is given below).
+WRF is compiled with the ``(dmpar) GNU (gfortran/gcc)`` option. It means that it is compiled for an architecture supporting Dynamic Memory Parallelism using a GNU/Linux operating system. This is implemented usually by the MPI standard on multi-core CPUs. It is option number 34 from the list shown below. This list is obtained by running WRF's internal configure script manually (list is given below).
 ```
   1. (serial)   2. (smpar)   3. (dmpar)   4. (dm+sm)   PGI (pgf90/gcc)
   5. (serial)   6. (smpar)   7. (dmpar)   8. (dm+sm)   PGI (pgf90/pgcc): SGI MPT
@@ -65,9 +47,76 @@ Compile for nesting? (1=basic, 2=preset moves, 3=vortex following) [default 1]
 ```
 The above two options are set in the configuration section, just before compiling WRF.  If you have a different machine or need for other nesting options, please feel free to modify the install script.
 
-The script will set all permissions with respect to the user running the script. And, the default installation directory is the home directory of the executing user, taken from environment variable ${HOME}. To change target directory, execute script as
+#### WPS
+
+The WRF pre-processing system (WPS) is compiled with the option ``Linux x86_64, gfortran (dmpar)``. It is option 3 of the following list, which is obtained by manually calling the WPS internal configure script. The option is set by the install script in the configuration section of the process of building WPS. Again, if you are on a different platform, modify accordingly.
 ```
-$ OUTPUT=CUSTOM_PATH ./install_wrfv3.sh
+   1.  Linux x86_64, gfortran    (serial)
+   2.  Linux x86_64, gfortran    (serial_NO_GRIB2)
+   3.  Linux x86_64, gfortran    (dmpar)
+   4.  Linux x86_64, gfortran    (dmpar_NO_GRIB2)
+   5.  Linux x86_64, PGI compiler   (serial)
+   6.  Linux x86_64, PGI compiler   (serial_NO_GRIB2)
+   7.  Linux x86_64, PGI compiler   (dmpar)
+   8.  Linux x86_64, PGI compiler   (dmpar_NO_GRIB2)
+   9.  Linux x86_64, PGI compiler, SGI MPT   (serial)
+  10.  Linux x86_64, PGI compiler, SGI MPT   (serial_NO_GRIB2)
+  11.  Linux x86_64, PGI compiler, SGI MPT   (dmpar)
+  12.  Linux x86_64, PGI compiler, SGI MPT   (dmpar_NO_GRIB2)
+  13.  Linux x86_64, IA64 and Opteron    (serial)
+  14.  Linux x86_64, IA64 and Opteron    (serial_NO_GRIB2)
+  15.  Linux x86_64, IA64 and Opteron    (dmpar)
+  16.  Linux x86_64, IA64 and Opteron    (dmpar_NO_GRIB2)
+  17.  Linux x86_64, Intel compiler    (serial)
+  18.  Linux x86_64, Intel compiler    (serial_NO_GRIB2)
+  19.  Linux x86_64, Intel compiler    (dmpar)
+  20.  Linux x86_64, Intel compiler    (dmpar_NO_GRIB2)
+  21.  Linux x86_64, Intel compiler, SGI MPT    (serial)
+  22.  Linux x86_64, Intel compiler, SGI MPT    (serial_NO_GRIB2)
+  23.  Linux x86_64, Intel compiler, SGI MPT    (dmpar)
+  24.  Linux x86_64, Intel compiler, SGI MPT    (dmpar_NO_GRIB2)
+  25.  Linux x86_64, Intel compiler, IBM POE    (serial)
+  26.  Linux x86_64, Intel compiler, IBM POE    (serial_NO_GRIB2)
+  27.  Linux x86_64, Intel compiler, IBM POE    (dmpar)
+  28.  Linux x86_64, Intel compiler, IBM POE    (dmpar_NO_GRIB2)
+  29.  Linux x86_64 g95 compiler     (serial)
+  30.  Linux x86_64 g95 compiler     (serial_NO_GRIB2)
+  31.  Linux x86_64 g95 compiler     (dmpar)
+  32.  Linux x86_64 g95 compiler     (dmpar_NO_GRIB2)
+  33.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (serial)
+  34.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (serial_NO_GRIB2)
+  35.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (dmpar)
+  36.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (dmpar_NO_GRIB2)
+  37.  Cray XC CLE/Linux x86_64, Intel compiler   (serial)
+  38.  Cray XC CLE/Linux x86_64, Intel compiler   (serial_NO_GRIB2)
+  39.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar)
+  40.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar_NO_GRIB2)
 ```
 
+#### Version 3 : install_wrfv3.sh
+
+The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
+
+- MPICH 3.0.4 : mpich-3.0.4.tar.gz
+[https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
+
+- netCDF 4.1.3 : netcdf-4.1.3.tar.gz
+[https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
+
+- NCARG 6.6.2 : ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz
+[https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html](https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html)
+
+- udunits 2.2.28 : udunits-2.2.28.tar.gz
+[https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
+
+- Ncview 1.93g : ncview-1.93g.tar.gz
+[http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
+
+- WRF 3.8.1
+[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
+
+- WPS 3.8.1
+[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
+
+__NOTE:__ The source codes for MPICH and netCDF are obtained from the WRF compiling tutorial page. Other dependencies are listed on that page, such as Jasper, libpng and zlib. These packages are already available from the base Slackware system.
 

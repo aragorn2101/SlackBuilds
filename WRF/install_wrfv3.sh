@@ -66,12 +66,6 @@ UDUNITS_VER=2.2.28
 NCVIEW_VER=1.93g
 
 
-# Set number of parallel threads for compilation process
-NUMJOBS=${NUMJOBS:-$(( `nproc --all` - 1 ))}
-if [ ${NUMJOBS} -le 0 ]; then
-  NUMJOBS=1
-fi
-
 USERID=`id -u`
 
 if [ -z "$ARCH" ]; then
@@ -325,7 +319,7 @@ sed -i '235s/FALSE/TRUE/' arch/Config_new.pl
 EOF
 
 echo "Compiling WRF using command"
-echo "compile -j ${NUMJOBS} em_real &> ${PKG}/WRF/log.compile"
+echo "compile em_real &> ${PKG}/WRF/log.compile"
 echo "..."
 ./compile em_real &> log.compile
 
