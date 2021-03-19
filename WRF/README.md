@@ -1,7 +1,5 @@
 # Weather Research and Forecasting (WRF) model
 
-WRF is a state-of-the-art atmospheric modeling system designed for both meteorological research and numerical weather prediction. It offers a host of  options for atmospheric processes and can run on a variety of computing platforms. WRF excels in a broad range of applications across scales ranging from tens of meters to thousands of kilometers The Mesoscale and Microscale Meteorology Laboratory (MMM) of NCAR supports the WRF system to the user community, and maintains the WRF code on GitHub. Check out [https://www.mmm.ucar.edu/weather-research-and-forecasting-model](https //www.mmm.ucar.edu/weather-research-and-forecasting-model) for more.
-
 We propose installation scripts for WRF ARW (Advanced Research WRF). The source can be obtained from the ARW users' page ([https://www2.mmm.ucar.edu/wrf/users/](https://www2.mmm.ucar.edu/wrf/users/)). By default, WRF ARW is compiled in a directory where the user has write access, and the full source code is kept. This is because WRF and its pre-processor WPS are usually run directly from the source code directories.  There can be two ways of installing WRF on Slackware:
 
 - The default method taught by the official webpage is to install the dependencies in a custom location and install WRF alongside in a directory.
@@ -93,29 +91,29 @@ The WRF pre-processing system (WPS) is compiled with the option ``Linux x86_64, 
   40.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar_NO_GRIB2)
 ```
 
-#### Version 3 : install_wrfv3.sh
+### Version 3 : install_wrfv3.sh
 
 The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
 
-- MPICH 3.0.4 : mpich-3.0.4.tar.gz
+- MPICH 3.0.4 : mpich-3.0.4.tar.gz </br>
 [https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
 
-- netCDF 4.1.3 : netcdf-4.1.3.tar.gz
+- netCDF 4.1.3 : netcdf-4.1.3.tar.gz </br>
 [https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
 
-- NCARG 6.6.2 : ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz
+- NCARG 6.6.2 : ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz </br>
 [https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html](https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html)
 
-- udunits 2.2.28 : udunits-2.2.28.tar.gz
+- udunits 2.2.28 : udunits-2.2.28.tar.gz </br>
 [https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
 
-- Ncview 1.93g : ncview-1.93g.tar.gz
+- Ncview 1.93g : ncview-1.93g.tar.gz </br>
 [http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
 
-- WRF 3.8.1
+- WRF 3.8.1 </br>
 [https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
 
-- WPS 3.8.1
+- WPS 3.8.1 </br>
 [https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
 
 __NOTE:__ The source codes for MPICH and netCDF are obtained from the WRF compiling tutorial page. Other dependencies are listed on that page, such as Jasper, libpng and zlib. These packages are already available from the base Slackware system.
