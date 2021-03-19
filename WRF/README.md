@@ -5,13 +5,33 @@ We propose installation scripts for WRF ARW (Advanced Research WRF). The source 
 - The default method taught by the official webpage is to install the dependencies in a custom location and install WRF alongside in a directory.
 - The other method is the natural way of installing dependencies using SlackBuilds and compile WRF in a custom directory.
 
+**NOTE:** The main requirement is a 64-bit processor and operating system. All the scripts were tested using a 64-bit Slackware 14.2 GNU/Linux installed on an Intel Core-i7 machine. Building and installing all the software takes some time, but it is usually less than 30 minutes. The final space taken on disk is around 1.1 GiB.
+
 
 ## install_wrfv-.sh
 
-The install scripts install WRF according to the first method listed above. The source code for the dependencies, and the source archives for both WRF and WPS should be placed in the same directory as the script. The script is made executable and run. It will set all permissions with respect to the user executing it, and the default installation directory is the home directory of the user, taken from environment variable ${HOME}. To change target directory, execute script as
+The install scripts install WRF according to the first method listed above. The source code for the dependencies, and the source archives for both WRF and WPS should be placed in the same directory as the script. The script is made executable and run. The generic call is
 ```
-$ OUTPUT=CUSTOM_PATH ./install_wrfv[VERSION].sh
+$ NUMJOBS=NUM_OF_CORES_OR_THREADS OUTPUT=CUSTOM_PATH ./install_wrfvX.sh
 ```
+where ``X = 3 or 4``
+
+``NUMJOBS`` is the number of threads or cores used to compile the software. If it is not passed on the command line, the default is calculated from the number of processors present on your machine. If your computer features 4 cores, the number of cores used to build software is 3. ``OUTPUT`` is the directory under which all the software is placed. The script will create a directory with name ``wrfvX`` (where ``X = 3 or 4``), under ``OUTPUT``. At the end of installation, the directory tree will look like this:
+```
+- [OUTPUT]/
+  - wrfvX/
+    - DATA/
+    - GEOG/
+    - WPS/
+    - WRF/
+    - deps/
+    - env.sh
+    - utils/
+```
+
+The ``DATA`` and ``GEOG`` directories are empty. These are created to allow the user to store the input data close to the WRF software. ``DATA`` normally would contain GRIB or netCDF files, while ``GEOG`` should contain the geographical input data mandatory fields. Directory ``deps`` contains dependency libraries and ``utils`` contains NCAR graphics, NCL and ncview. The script will set all permissions with respect to the user executing it. If it is not passed through the call to the script, the default value of ``OUTPUT`` is the path to the home directory of the user, taken from environment variable ``${HOME}``.
+
+The WPS directory contains the WRF pre-processor source code and the executable resulting from compilation: ``geogrid.exe``, ``ungrib.exe`` and ``metgrid.exe``. The WRF directory is where the WRF source code resides and it contains the four executables: ``real.exe``, ``ndown.exe``, ``wrf.exe`` and ``tc.exe``. Finally, the ``env.sh`` script is a file which needs to be sourced every time you wish to use WRF or WPS. It sets up the environment required for the good functioning of WRF.
 
 #### WRF
 
@@ -91,30 +111,37 @@ The WRF pre-processing system (WPS) is compiled with the option ``Linux x86_64, 
   40.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar_NO_GRIB2)
 ```
 
-### Version 3 : install_wrfv3.sh
+#### Version 3 : install_wrfv3.sh
 
 The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
 
-- MPICH 3.0.4 : mpich-3.0.4.tar.gz </br>
+- MPICH 3.0.4
+``mpich-3.0.4.tar.gz``
 [https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
 
-- netCDF 4.1.3 : netcdf-4.1.3.tar.gz </br>
+- netCDF 4.1.3
+``netcdf-4.1.3.tar.gz``
 [https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
 
-- NCARG 6.6.2 : ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz </br>
+- NCARG 6.6.2
+``ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz``
 [https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html](https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html)
 
-- udunits 2.2.28 : udunits-2.2.28.tar.gz </br>
+- udunits 2.2.28
+``udunits-2.2.28.tar.gz``
 [https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
 
-- Ncview 1.93g : ncview-1.93g.tar.gz </br>
+- Ncview 1.93g
+``ncview-1.93g.tar.gz``
 [http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
 
-- WRF 3.8.1 </br>
+- WRF 3.8.1
+``WRFV3.8.1.TAR.gz``
 [https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
 
-- WPS 3.8.1 </br>
+- WPS 3.8.1
+``WPSV3.8.1.TAR.gz``
 [https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
 
-__NOTE:__ The source codes for MPICH and netCDF are obtained from the WRF compiling tutorial page. Other dependencies are listed on that page, such as Jasper, libpng and zlib. These packages are already available from the base Slackware system.
+__NOTE:__ The source codes for MPICH and netCDF are obtained from the WRF compiling tutorial page ([https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)). Other dependencies are listed on that page, such as Jasper, libpng and zlib. These packages are already available from the base Slackware system.
 
