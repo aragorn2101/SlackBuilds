@@ -115,32 +115,32 @@ The WRF pre-processing system (WPS) is compiled with the option ``Linux x86_64, 
 
 The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
 
-- MPICH 3.0.4
-``mpich-3.0.4.tar.gz``
+- MPICH 3.0.4 </br>
+``mpich-3.0.4.tar.gz`` </br>
 [https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
 
-- netCDF 4.1.3
-``netcdf-4.1.3.tar.gz``
+- netCDF 4.1.3 </br>
+``netcdf-4.1.3.tar.gz`` </br>
 [https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
 
-- NCARG 6.6.2
-``ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz``
+- NCARG 6.6.2 </br>
+``ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz`` </br>
 [https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html](https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html)
 
-- udunits 2.2.28
-``udunits-2.2.28.tar.gz``
+- udunits 2.2.28 </br>
+``udunits-2.2.28.tar.gz`` </br>
 [https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
 
-- Ncview 1.93g
-``ncview-1.93g.tar.gz``
+- Ncview 1.93g </br>
+``ncview-1.93g.tar.gz`` </br>
 [http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
 
-- WRF 3.8.1
-``WRFV3.8.1.TAR.gz``
+- WRF 3.8.1 </br>
+``WRFV3.8.1.TAR.gz`` </br>
 [https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
 
-- WPS 3.8.1
-``WPSV3.8.1.TAR.gz``
+- WPS 3.8.1 </br>
+``WPSV3.8.1.TAR.gz`` </br>
 [https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
 
 __NOTE:__ The source codes for MPICH and netCDF are obtained from the WRF compiling tutorial page ([https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)). Other dependencies are listed on that page, such as Jasper, libpng and zlib. These packages are already available from the base Slackware system.

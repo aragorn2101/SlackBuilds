@@ -1,12 +1,14 @@
 #!/bin/sh
-
-# Copyright 2021 Nitish Ragoomundun, Mauritius
-# All rights reserved.
 #
-# Redistribution and use of this script, with or without modification, is
-# permitted provided that the following conditions are met:
+#  Script to install WRF 3.8.1 along with its dependencies.
 #
-# 1. Redistributions of this script must retain the above copyright
+#  Copyright (C) 2021 Nitish Ragoomundun, Mauritius <lrugratz       com>
+#                                                            @gmail.
+#
+#  Redistribution and use of this script, with or without modification, is
+#  permitted provided that the following conditions are met:
+#
+#  1. Redistributions of this script must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
 #
 #  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
@@ -145,6 +147,14 @@ export PATH=\$NETCDF/bin:\$PATH
 export LD_LIBRARY_PATH=\$NETCDF/lib:\$LD_LIBRARY_PATH
 " >> ${PKG}/env.sh
 
+# Update flags
+export LDFLAGS=-L${NETCDF}/lib\ ${LDFLAGS}
+export CPPFLAGS=-I${NETCDF}/include\ ${CPPFLAGS}
+export CXXFLAGS=-I${NETCDF}/include\ ${CXXFLAGS}
+export NETCDF_INC=${NETCDF}/include
+export NETCDF_LIB=${NETCDF}/lib
+
+
 
 ###  MPICH  ###
 echo
@@ -176,6 +186,10 @@ echo -e "
 export PATH=${PKG}/deps/mpich/bin:\$PATH
 export LD_LIBRARY_PATH=${PKG}/deps/mpich/lib:\$LD_LIBRARY_PATH
 " >> ${PKG}/env.sh
+
+# Update flags
+export LDFLAGS=-L${PKG}/deps/mpich/lib\ ${LDFLAGS}
+
 
 
 ###  NCAR Graphics  ###
@@ -232,14 +246,14 @@ make install
 find $PKG/deps/udunits -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-export PATH=${PKG}/deps/udunits/bin:${PATH}
-export LD_LIBRARY_PATH=${PKG}/deps/udunits/lib:${LD_LIBRARY_PATH}
+UDUNITS=${PKG}/deps/udunits
+export PATH=${UDUNITS}/bin:${PATH}
+export LD_LIBRARY_PATH=${UDUNITS}/lib:${LD_LIBRARY_PATH}
 
 echo -e "
-export PATH=${PKG}/deps/udunits/bin:\$PATH
-export LD_LIBRARY_PATH=${PKG}/deps/udunits/lib:\$LD_LIBRARY_PATH
+export PATH=${UDUNITS}/bin:\$PATH
+export LD_LIBRARY_PATH=${UDUNITS}/lib:\$LD_LIBRARY_PATH
 " >> ${PKG}/env.sh
-
 
 echo
 echo "---------------------------------------------------------------"
@@ -261,6 +275,8 @@ find -L . \
             --with-netcdf_incdir=${PKG}/deps/netcdf/include \
             --with-netcdf_libdir=${PKG}/deps/netcdf/lib \
             --with-nc-config=${PKG}/deps/netcdf/bin/nc-config \
+            --with-udunits_incdir=${UDUNITS}/include \
+            --with-udunits_bindir=${UDUNITS}/bin \
             --build=$ARCH-slackware-linux
 
 make
@@ -283,12 +299,6 @@ export LD_LIBRARY_PATH=${PKG}/utils/ncview/lib:\$LD_LIBRARY_PATH
 
 
 rm -rf $PKG/build
-
-
-# Update FLAGS
-export LDFLAGS="${LDFLAGS} -L${NETCDF}/lib -L${PKG}/deps/mpich/lib"
-export CPPFLAGS="${CPPFLAGS} -I${NETCDF}/include"
-export CXXFLAGS="${CXXFLAGS} -I${NETCDF}/include"
 
 
 ###  WRF  ###
