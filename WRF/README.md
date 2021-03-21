@@ -5,7 +5,7 @@ We propose installation scripts for WRF ARW (Advanced Research WRF). The source 
 - The default method taught by the official webpage is to install the dependencies in a custom location and install WRF alongside in a directory.
 - The other method is the natural way of installing dependencies using SlackBuilds and compile WRF in a custom directory.
 
-**NOTE:** The main requirement is a 64-bit processor and operating system. All the scripts were tested using a 64-bit Slackware 14.2 GNU/Linux installed on an Intel Core-i7 machine. Building and installing all the software takes some time, but it is usually less than 30 minutes. The final space taken on disk is around 1.1 GiB.
+**NOTE:** The main requirement is a 64-bit processor and operating system. All the scripts were tested using a 64-bit Slackware 14.2 GNU/Linux installed on an Intel Core-i7 machine. Building and installing all the software takes some time, but it is usually less than 30 minutes. The final space taken on disk is around 1.1 GB for the software only, and around 30 GB when including the geographical static data.
 
 
 ## install_wrfv-.sh
@@ -115,6 +115,14 @@ The WRF pre-processing system (WPS) is compiled with the option ``Linux x86_64, 
 
 The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
 
+- WRF 3.8.1 </br>
+``WRFV3.8.1.TAR.gz`` </br>
+[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
+
+- WPS 3.8.1 </br>
+``WPSV3.8.1.TAR.gz`` </br>
+[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
+
 - MPICH 3.0.4 </br>
 ``mpich-3.0.4.tar.gz`` </br>
 [https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
@@ -135,13 +143,42 @@ The versions and the source tar balls that the script expect are listed below. T
 ``ncview-1.93g.tar.gz`` </br>
 [http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
 
-- WRF 3.8.1 </br>
-``WRFV3.8.1.TAR.gz`` </br>
-[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
-
-- WPS 3.8.1 </br>
-``WPSV3.8.1.TAR.gz`` </br>
-[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
-
 __NOTE:__ The source codes for MPICH and netCDF are obtained from the WRF compiling tutorial page ([https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)). Other dependencies are listed on that page, such as Jasper, libpng and zlib. These packages are already available from the base Slackware system.
+
+
+#### Version 4 : install_wrfv4.sh
+
+The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
+
+- WRF 4.2.2 </br>
+``WRF-4.2.2.tar.gz`` </br>
+[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
+
+- WPS 4.2 </br>
+``WPS-4.2.tar.gz`` </br>
+[https://www2.mmm.ucar.edu/wrf/users/download/get_source.html](https://www2.mmm.ucar.edu/wrf/users/download/get_source.html)
+
+- MPICH 3.4.1 </br>
+``mpich-3.4.1.tar.gz`` </br>
+[https://www.mpich.org/downloads](https://www.mpich.org/downloads)
+
+- netCDF 4.7.4 </br>
+``netcdf-c-4.7.4.tar.gz`` </br>
+[https://www.unidata.ucar.edu/downloads/netcdf](https://www.unidata.ucar.edu/downloads/netcdf)
+
+- netCDF Fortran 4.5.3 </br>
+``netcdf-fortran-4.5.3.tar.gz`` </br>
+[https://www.unidata.ucar.edu/downloads/netcdf](https://www.unidata.ucar.edu/downloads/netcdf)
+
+- NCARG 6.6.2 </br>
+``ncl_ncarg-6.6.2-CentOS7.6_64bit_nodap_gnu485.tar.gz`` </br>
+[https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html](https://www.earthsystemgrid.org/dataset/ncl.662_2.nodap/file.html)
+
+- udunits 2.2.28 </br>
+``udunits-2.2.28.tar.gz`` </br>
+[https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
+
+- Ncview 1.93g </br>
+``ncview-1.93g.tar.gz`` </br>
+[http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
 
