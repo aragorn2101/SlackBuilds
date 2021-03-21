@@ -111,7 +111,7 @@ export JASPERLIB=/usr/lib${LIBDIRSUFFIX}
 set -e
 
 rm -rf $PKG
-mkdir -p $PKG/{DATA,WPS,WRF,deps,utils,build}
+mkdir -p $PKG/{DATA,GEOG,WPS,WRF,deps,utils,build}
 
 
 ###  Initialize environment setup script  ###
