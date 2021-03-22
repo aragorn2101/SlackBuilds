@@ -2,13 +2,13 @@
 
 We propose installation scripts for WRF ARW (Advanced Research WRF). The source can be obtained from the ARW users' page ([https://www2.mmm.ucar.edu/wrf/users/](https://www2.mmm.ucar.edu/wrf/users/)). By default, WRF ARW is compiled in a directory where the user has write access, and the full source code is kept. This is because WRF and its pre-processor WPS are usually run directly from the source code directories.  There can be two ways of installing WRF on Slackware:
 
-- The default method taught by the official webpage is to install the dependencies in a custom location and install WRF alongside in a directory.
+- The default method, taught by the official webpage, where the dependencies are installed in a directory alongside the WRF installation, in a custom location.
 - The other method is the natural way of installing dependencies using SlackBuilds and compile WRF in a custom directory.
 
-**NOTE:** The main requirement is a 64-bit processor and operating system. All the scripts were tested using a 64-bit Slackware 14.2 GNU/Linux installed on an Intel Core-i7 machine. Building and installing all the software takes some time, but it is usually less than 30 minutes. The final space taken on disk is around 1.1 GB for the software only, and around 30 GB when including the geographical static data.
+**NOTE:** The main requirement is a 64-bit processor and operating system. All the scripts were tested using a 64-bit Slackware 14.2 GNU/Linux installed on an Intel Core i7-7700K machine. Building and installing all the software on that machine takes less than 15 minutes. Since it is a high-end processor, a longer build time would be expected on other machines. The final space taken on disk is around 1.1 GB for the software only, and around 30 GB when the geographical static data is included.
 
 
-## install_wrfv-.sh
+## install_wrfvX.sh
 
 The install scripts install WRF according to the first method listed above. The source code for the dependencies, and the source archives for both WRF and WPS should be placed in the same directory as the script. The script is made executable and run. The generic call is
 ```
@@ -29,9 +29,13 @@ where ``X = 3 or 4``
     - utils/
 ```
 
-The ``DATA`` and ``GEOG`` directories are empty. These are created to allow the user to store the input data close to the WRF software. ``DATA`` normally would contain GRIB or netCDF files, while ``GEOG`` should contain the geographical input data mandatory fields. Directory ``deps`` contains dependency libraries and ``utils`` contains NCAR graphics, NCL and ncview. The script will set all permissions with respect to the user executing it. If it is not passed through the call to the script, the default value of ``OUTPUT`` is the path to the home directory of the user, taken from environment variable ``${HOME}``.
+The ``DATA`` and ``GEOG`` directories are empty. These are created to allow the user to store input data close to the WRF software. Directory ``DATA`` normally would contain GRIB or netCDF files. It is recommended that the content of the directory obtained by extracting the archive containing the geographical input data mandatory fields is moved to directory ``GEOG``. Then, the field ``geog_data_path``, in namelist.wps, can be set to ``${OUTPUT}/wrfvX/GEOG``.
 
-The WPS directory contains the WRF pre-processor source code and the executable resulting from compilation: ``geogrid.exe``, ``ungrib.exe`` and ``metgrid.exe``. The WRF directory is where the WRF source code resides and it contains the four executables: ``real.exe``, ``ndown.exe``, ``wrf.exe`` and ``tc.exe``. Finally, the ``env.sh`` script is a file which needs to be sourced every time you wish to use WRF or WPS. It sets up the environment required for the good functioning of WRF.
+Directory ``deps`` contains dependency libraries and ``utils`` contains NCAR graphics, NCL and ncview. The script will set all permissions with respect to the user executing it. If it is not passed through the call to the script, the default value of ``OUTPUT`` is the path to the home directory of the user, taken from environment variable ``${HOME}``.
+
+The WPS directory contains the WRF pre-processor source code and the executable resulting from compilation: ``geogrid.exe``, ``ungrib.exe`` and ``metgrid.exe``. The WRF directory is where the WRF source code resides and it contains the four executables: ``real.exe``, ``ndown.exe``, ``wrf.exe`` and ``tc.exe``.
+
+**NOTE:** the ``env.sh`` script is a file which needs to be sourced every time you wish to use WRF or WPS. It sets up the environment required for the good functioning of WRF.
 
 #### WRF
 
