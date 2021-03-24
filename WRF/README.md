@@ -36,6 +36,9 @@ Directory ``deps`` contains dependency libraries and ``utils`` contains NCAR gra
 The WPS directory contains the WRF pre-processor source code and the executable resulting from compilation: ``geogrid.exe``, ``ungrib.exe`` and ``metgrid.exe``. The WRF directory is where the WRF source code resides and it contains the four executables: ``real.exe``, ``ndown.exe``, ``wrf.exe`` and ``tc.exe``.
 
 **NOTE:** the ``env.sh`` script is a file which needs to be sourced every time you wish to use WRF or WPS. It sets up the environment required for the good functioning of WRF.
+```
+$ source env.sh
+```
 
 #### WRF
 

@@ -405,4 +405,17 @@ else
 fi
 
 
+echo
+echo "----------------------------------------------------------------------"
+echo "Finished installing WRF, WPS and their dependencies in"
+echo "${PKG}/"
+echo
+echo "You may start using WRF by first setting up the environment with the"
+echo "env.sh script from the installation directory:"
+echo "> source env.sh"
+echo
+echo "----------------------------------------------------------------------"
+echo
+
+
 exit 0
