@@ -418,9 +418,6 @@ WRF_DIR=${PKG}/WRF \
 3
 EOF
 
-# Fix path for WRF installation
-sed -i '34s/WRFV3/WRF/' configure.wps
-
 # Build
 echo "Compiling WPS using command"
 echo "compile &> ${PKG}/WPS/log.compile"

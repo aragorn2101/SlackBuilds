@@ -104,7 +104,8 @@ mkdir -p $PKG/{DATA,GEOG,WPS,WRF,deps,utils,build}
 
 
 ###  Initialize environment setup script  ###
-echo -e "#!/bin/sh
+echo -e "
+#  Initialize environment for WRF
 
 export JASPERINC=/usr/include/jasper
 export JASPERLIB=/usr/lib${LIBDIRSUFFIX}
