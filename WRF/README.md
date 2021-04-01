@@ -189,3 +189,16 @@ The versions and the source tar balls that the script expect are listed below. T
 ``ncview-1.93g.tar.gz`` </br>
 [http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
 
+
+#### Version 4 with OpenMPI : install_wrfv4_OpenMPI.sh
+
+Originally, MPICH was used for the WRF installations as the WRF website recommended its use based on their experience. However, we noticed that OpenMPI can also be used. Thus, we include this script, which installs the same batch of software as the other script, except for the MPI package. For this script, the OpenMPI source must be fetched:
+
+- OpenMPI 4.1.0 </br>
+``openmpi-4.1.0.tar.bz2`` </br>
+[https://www.open-mpi.org/software/ompi/v4.1/](https://www.open-mpi.org/software/ompi/v4.1/)
+
+We made this alternate script to give users a choice. Also, OpenMPI gives the opportunity to explicitly specify using threads instead of cores when executing a program. For example, when using Intel processors there are hyperthreads available which can be used to launch jobs, analogous to having distinct physical cores. The functionality is used as follows:
+```
+mpirun --use-hwthread-cpus -np [NUM]
+```
