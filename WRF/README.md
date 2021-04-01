@@ -192,7 +192,7 @@ The versions and the source tar balls that the script expect are listed below. T
 
 #### Version 4 with OpenMPI : install_wrfv4_OpenMPI.sh
 
-Originally, MPICH was used for the WRF installations as the WRF website recommended its use based on their experience. However, we noticed that OpenMPI can also be used. Thus, we include this script, which installs the same batch of software as the other script, except for the MPI package. For this script, the OpenMPI source must be fetched:
+Originally, MPICH was used for the WRF installations as the WRF website recommended its use based on their experience. However, we noticed that, with WRF version 4, OpenMPI can also be used. Thus, we include this script, which installs the same batch of software as the other script, except for the MPI package. For this script, the OpenMPI source must be fetched:
 
 - OpenMPI 4.1.0 </br>
 ``openmpi-4.1.0.tar.bz2`` </br>
