@@ -12,7 +12,7 @@ We propose installation scripts for WRF ARW (Advanced Research WRF). The source 
 
 The install scripts install WRF according to the first method listed above. The source code for the dependencies, and the source archives for both WRF and WPS should be placed in the same directory as the script. The script is made executable and run. The generic call is
 ```
-$ NUMJOBS=NUM_OF_CORES_OR_THREADS OUTPUT=CUSTOM_PATH ./install_wrfvX.sh
+$ NUMJOBS=NUMBER_OF_CORES_OR_THREADS OUTPUT=CUSTOM_PATH ./install_wrfvX.sh
 ```
 where ``X = 3 or 4``
 
@@ -200,5 +200,5 @@ Originally, MPICH was used for the WRF installations as the WRF website recommen
 
 We made this alternate script to give users a choice. Also, OpenMPI gives the opportunity to explicitly specify using threads instead of cores when executing a program. For example, when using Intel processors there are hyperthreads available which can be used to launch jobs, analogous to having distinct physical cores. The functionality is used as follows:
 ```
-mpirun --use-hwthread-cpus -np [NUM]
+mpirun --use-hwthread-cpus -np [NUM] wrf.exe
 ```
