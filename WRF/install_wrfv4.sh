@@ -2,8 +2,9 @@
 #
 #  Script to install WRF 4.2.2 along with its dependencies.
 #
-#  Copyright (C) 2021 Nitish Ragoomundun, Mauritius <lrugratz       com>
-#                                                            @gmail.
+#  Copyright (C) 2021 Nitish Ragoomundun, Mauritius
+#                     lrugratz       com
+#                             @gmail.
 #
 #  Redistribution and use of this script, with or without modification, is
 #  permitted provided that the following conditions are met:

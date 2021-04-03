@@ -1,12 +1,16 @@
 #!/bin/sh
-
-# Copyright 2021 Nitish Ragoomundun, Mauritius
-# All rights reserved.
 #
-# Redistribution and use of this script, with or without modification, is
-# permitted provided that the following conditions are met:
+#  Script to install WRF 4.2.2 along with its dependencies,
+#  including OpenMPI 4.1.0.
 #
-# 1. Redistributions of this script must retain the above copyright
+#  Copyright (C) 2021 Nitish Ragoomundun, Mauritius
+#                     lrugratz       com
+#                             @gmail.
+#
+#  Redistribution and use of this script, with or without modification, is
+#  permitted provided that the following conditions are met:
+#
+#  1. Redistributions of this script must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
 #
 #  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
@@ -19,6 +23,7 @@
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
 
 
 #
