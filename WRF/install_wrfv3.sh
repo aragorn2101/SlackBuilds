@@ -70,6 +70,7 @@ NCVIEW_VER=1.93g
 
 
 USERID=`id -u`
+GROUPID=`id -g`
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -123,7 +124,7 @@ mkdir $PKG/deps/netcdf
 cd $PKG/build
 tar xvf $CWD/netcdf-${NETCDF_VER}.tar.gz
 cd netcdf-${NETCDF_VER}
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
@@ -168,7 +169,7 @@ mkdir $PKG/deps/mpich
 cd $PKG/build
 tar xvf $CWD/mpich-${MPICH_VER}.tar.gz
 cd mpich-${MPICH_VER}
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
@@ -203,7 +204,7 @@ echo
 mkdir $PKG/utils/ncarg
 cd $PKG/utils/ncarg
 tar xvf $CWD/ncl_ncarg-${NCARG_VER}-CentOS7.6_64bit_nodap_gnu485.tar.gz
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
@@ -231,7 +232,7 @@ mkdir $PKG/deps/udunits
 cd $PKG/build
 tar xvf $CWD/udunits-${UDUNITS_VER}.tar.gz
 cd udunits-${UDUNITS_VER}
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
@@ -266,7 +267,7 @@ mkdir -p $PKG/utils/ncview/local/lib
 cd $PKG/build
 tar xvf $CWD/ncview-${NCVIEW_VER}.tar.gz
 cd ncview-${NCVIEW_VER}
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
@@ -311,7 +312,7 @@ echo "---------------------------------------------------------------"
 echo
 tar -C $PKG/WRF --strip-components=1 -zxf $CWD/WRFV${WRF_VER}.TAR.gz
 cd $PKG/WRF
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
@@ -358,7 +359,7 @@ echo "---------------------------------------------------------------"
 echo
 tar -C $PKG/WPS --strip-components=1 -zxf $CWD/WPSV${WPS_VER}.TAR.gz
 cd $PKG/WPS
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
