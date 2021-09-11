@@ -177,7 +177,7 @@ echo
 cd $PKG/build
 tar xvf $CWD/netcdf-fortran-${NETCDF_F_VER}.tar.gz
 cd netcdf-fortran-${NETCDF_F_VER}
-chown -R ${USERID}:${} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
