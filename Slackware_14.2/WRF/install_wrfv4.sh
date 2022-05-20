@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#  Script to install WRF 4.2.2 along with its dependencies.
+#  Script to install WRF 4.2.2 along with its dependencies for Slackware 14.2.
 #
 #  Copyright (C) 2021 Nitish Ragoomundun, Mauritius
 #                     lrugratz       com

@@ -29,7 +29,11 @@ where ``X = 3 or 4``
     - utils/
 ```
 
-The ``DATA`` and ``GEOG`` directories are empty. These are created to allow the user to store input data close to the WRF software. Directory ``DATA`` normally would contain GRIB or netCDF files. It is recommended that the content of the directory obtained by extracting the archive containing the geographical input data mandatory fields is moved to directory ``GEOG``. Then, the field ``geog_data_path``, in namelist.wps, can be set to ``${OUTPUT}/wrfvX/GEOG``.
+The ``DATA`` and ``GEOG`` directories are empty. These are created to allow the user to store input data close to the WRF software. Directory ``DATA`` normally would contain GRIB or netCDF files. It is recommended that the content of the archive containing the geographical input data mandatory fields is directly extracted to the ``GEOG``:
+```
+$ tar -C ${OUTPUT}/wrfvX/GEOG --strip-components=1 -zxf GEOG_MANDATORY_DATA.tar.gz
+```
+Then, the field ``geog_data_path``, in namelist.wps, can be set to ``${OUTPUT}/wrfvX/GEOG``.
 
 Directory ``deps`` contains dependency libraries and ``utils`` contains NCAR graphics, NCL and ncview. The script will set all permissions with respect to the user executing it. If it is not passed through the call to the script, the default value of ``OUTPUT`` is the path to the home directory of the user, taken from environment variable ``${HOME}``.
 
