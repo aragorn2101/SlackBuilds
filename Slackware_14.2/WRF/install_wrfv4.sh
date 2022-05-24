@@ -90,6 +90,12 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
+if [ "$ARCH" = "x86_64" ]; then
+  LIBDIRSUFFIX="64"
+else
+  LIBDIRSUFFIX=""
+fi
+
 CWD=$(pwd)
 
 # Installation directory
