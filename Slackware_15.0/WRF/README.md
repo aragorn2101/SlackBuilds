@@ -161,9 +161,11 @@ $ tar -C ${OUTPUT}/wrfv4/GEOG --strip-components=1 -zxf GEOG_MANDATORY_DATA.tar.
 ```
 Then, the field ``geog_data_path``, in namelist.wps, can be set to ``${OUTPUT}/wrfv4/GEOG``. Directory ``deps`` contains dependency libraries and ``utils`` contains ncview. The script will set all permissions with respect to the user executing it.
 
-The WPS directory contains the WRF pre-processor source code and the executable resulting from compilation: ``geogrid.exe``, ``ungrib.exe`` and ``metgrid.exe``. The WRF directory is where the WRF source code resides and it contains the four executables: ``real.exe``, ``ndown.exe``, ``wrf.exe`` and ``tc.exe``.
+The WPS directory contains the WRF pre-processor source code and the executable resulting from compilation: ``geogrid.exe``, ``ungrib.exe`` and ``metgrid.exe``. The WRF directory is where the WRF source code resides and it contains the four executables: ``real.exe``, ``ndown.exe``, ``wrf.exe`` and ``tc.exe`` under test/em\_real.
 
-**NOTE:** after compilation, the ``env.sh`` script is a file which needs to be sourced every time you wish to use WRF or WPS. It sets up the environment required for the good functioning of WRF.
+#### Running WPS and WRF
+
+After compilation, everytime WPS or WRF is to be used, the ``env.sh`` script (found in the ``OUTPUT`` directory) needs to be sourced. It sets up the proper environment required for the good functioning of WRF.
 ```
 $ source env.sh
 ```
