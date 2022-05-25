@@ -1,16 +1,18 @@
 # The Weather Research and Forecasting (WRF) model
 
-We propose an installation script for WRF ARW (Advanced Research WRF) for Slackware 15.0. We made use of the latest version, WRF 4.4, as opposed to version 4.2.2 previously for 14.2, since it turned out that WRF 4.2.2 presented issues when compiling with GCC 11.x in Slackware 15.0.
+We propose an installation script for WRF ARW (Advanced Research WRF) on Slackware 15.0. We made use of WRF version 4.4, as opposed to version 4.2.2 previously on 14.2, since it turned out that WRF 4.2.2 presented issues when compiled with GCC 11.x in Slackware 15.0.
 
 **NOTE:** The main requirement is a 64-bit processor and operating system. All the scripts were tested using a 64-bit Slackware 15.0 GNU/Linux installed on an Intel Core i7-7700K machine. Building and installing all the software on that machine takes around 20 minutes. It is expected to take a longer build time on other machines. The final space taken on disk is around 1.1 GB for the software only, and around 30 GB when the geographical static data is included.
 
 
+### WRF
 
-#### WRF
+- WRF 4.4 </br>
+``v4.4.tar.gz`` </br>
+[https://github.com/wrf-model/WRF/releases](https://github.com/wrf-model/WRF/releases)
+It is important that the archive **v4.4.tar.gz** is downloaded. The link pointed to by *Source code* lack a submodule. A note is attached on the webpage explaining this issue.
 
-The source code for WRF can be obtained at [https://github.com/wrf-model/WRF/releases](https://github.com/wrf-model/WRF/releases). It is important that the archive **v4.4.tar.gz** is downloaded. The link pointed to by *Source code* lack a submodule. A note is attached on the webpage explaining this issue.
-
-WRF is compiled with the ``(dmpar) GNU (gfortran/gcc)`` option. It means that it is compiled for an architecture supporting Dynamic Memory Parallelism using a GNU/Linux operating system. This is implemented usually by the MPI standard on multi-core CPUs. It is option number 34 from the list shown below. This list is obtained by running WRF's internal configure script manually (list is given below).
+WRF is compiled by the script with the ``(dmpar) GNU (gfortran/gcc)`` option. It means that it is compiled for an architecture supporting Dynamic Memory Parallelism using a GNU/Linux operating system. This is implemented usually by the MPI standard on multi-core CPUs. It is option number 34 from the list shown below. This list is obtained by running WRF's internal configure script manually (list is given below).
 ```
   1. (serial)   2. (smpar)   3. (dmpar)   4. (dm+sm)   PGI (pgf90/gcc)
   5. (serial)   6. (smpar)   7. (dmpar)   8. (dm+sm)   PGI (pgf90/pgcc): SGI MPT
@@ -40,9 +42,13 @@ Compile for nesting? (1=basic, 2=preset moves, 3=vortex following) [default 1]
 ```
 The above two options are set in the configuration section, just before compiling WRF.  If you have a different machine or need for other nesting options, please feel free to modify the install script.
 
-#### WPS
 
-The source code for the WRF pre-processing system (WPS) can be obtained at [https://github.com/wrf-model/WPS/releases](https://github.com/wrf-model/WPS/releases). As opposed to the WRF source code, the archive linked to by **Source code (tar.gz)** should be downloaded.
+### WRF pre-processing system (WPS)
+
+- WPS 4.4 </br>
+``WPS-4.4.tar.gz`` </br>
+[https://github.com/wrf-model/WPS/releases](https://github.com/wrf-model/WPS/releases)
+The source code for WPS is required for a fully functional WRF package. As opposed to the WRF source code, the archive linked to by **Source code (tar.gz)** should be downloaded.
 
 WPS is compiled with the option ``Linux x86_64, gfortran (dmpar)``. It is option 3 of the following list, which is obtained by manually calling the WPS internal configure script. The option is set by the install script in the configuration section of the process of building WPS. Again, if you are on a different platform, modify accordingly.
 ```
@@ -88,10 +94,46 @@ WPS is compiled with the option ``Linux x86_64, gfortran (dmpar)``. It is option
   40.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar_NO_GRIB2)
 ```
 
+### Dependencies and utilities
+
+The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be obtained are included.
+
+- netCDF 4.7.4 </br>
+``netcdf-c-4.7.4.tar.gz`` </br>
+[https://www.unidata.ucar.edu/downloads/netcdf](https://www.unidata.ucar.edu/downloads/netcdf)
+
+- netCDF Fortran 4.5.3 </br>
+``netcdf-fortran-4.5.3.tar.gz`` </br>
+[https://www.unidata.ucar.edu/downloads/netcdf](https://www.unidata.ucar.edu/downloads/netcdf)
+
+- OpenMPI 4.1.0 </br>
+``openmpi-4.1.0.tar.bz2`` </br>
+[https://www.open-mpi.org/software/ompi/v4.1/](https://www.open-mpi.org/software/ompi/v4.1/)
+
+- JasPer 1.900.1 </br>
+``jasper-1.900.1.zip``
+[https://ece.engr.uvic.ca/~frodo/jasper/](https://ece.engr.uvic.ca/~frodo/jasper/)
+
+- udunits 2.2.28 </br>
+``udunits-2.2.28.tar.gz`` </br>
+[https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
+
+- Ncview 1.93g </br>
+``ncview-1.93g.tar.gz`` </br>
+[http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
+
+#### WRF 4.4 with OpenMPI
+
+Originally, MPICH was used for the WRF installations as the WRF website recommended its use based on their experience. However, we had issues on Slackware 15.0 due to MPICH. First, the latter was not compiling unless the ``-fallow-argument-mismatch`` option was added to ``FFLAGS``. Then, although both WRF and WPS compiled successfully, geogrid.exe was encountering segmentation faults at runtime.
+
+Therefore, we decided to adopt OpenMPI, with which WRF and WPS work just fine. Moreover, OpenMPI gives the opportunity to explicitly specify using threads instead of cores when executing a program. For example, when using Intel processors there are hyperthreads available which can be used to launch jobs, analogous to having distinct physical cores. The functionality is used as follows:
+```
+mpirun --use-hwthread-cpus -np [NUM] wrf.exe
+```
 
 ## install_wrfv4.4.sh
 
-The install script installs WRF, WPS and all their dependencies in a common directory. The source code for the dependencies, and the source archives for both WRF and WPS should be placed in the same directory as the script. The install script is made executable and run. The generic call is
+The install script installs WRF, WPS and all their dependencies in a common directory. The source code for all dependencies, and the source archives for both WRF and WPS should be placed in the same directory as the script. The install script is made executable and run. The generic call is
 ```
 $ NUMJOBS=NUMBER_OF_CORES_OR_THREADS OUTPUT=CUSTOM_PATH ./install_wrfv4.4.sh
 ```
@@ -125,52 +167,3 @@ The WPS directory contains the WRF pre-processor source code and the executable 
 ```
 $ source env.sh
 ```
-
-The versions and the source tar balls that the script expect are listed below. The links to the webpages where they can be downloaded are included.
-
-- WRF 4.4 </br>
-``v4.4.tar.gz`` </br>
-[https://github.com/wrf-model/WRF/releases](https://github.com/wrf-model/WRF/releases)
-
-- WPS 4.4 </br>
-``WPS-4.4.tar.gz`` </br>
-[https://github.com/wrf-model/WPS/releases](https://github.com/wrf-model/WPS/releases)
-
-- netCDF 4.7.4 </br>
-``netcdf-c-4.7.4.tar.gz`` </br>
-[https://www.unidata.ucar.edu/downloads/netcdf](https://www.unidata.ucar.edu/downloads/netcdf)
-
-- netCDF Fortran 4.5.3 </br>
-``netcdf-fortran-4.5.3.tar.gz`` </br>
-[https://www.unidata.ucar.edu/downloads/netcdf](https://www.unidata.ucar.edu/downloads/netcdf)
-
-- OpenMPI 4.1.0 </br>
-``openmpi-4.1.0.tar.bz2`` </br>
-[https://www.open-mpi.org/software/ompi/v4.1/](https://www.open-mpi.org/software/ompi/v4.1/)
-
-- JasPer 1.900.1 </br>
-``jasper-1.900.1.zip``
-[https://ece.engr.uvic.ca/~frodo/jasper/](https://ece.engr.uvic.ca/~frodo/jasper/)
-
-- udunits 2.2.28 </br>
-``udunits-2.2.28.tar.gz`` </br>
-[https://www.unidata.ucar.edu/downloads/udunits/](https://www.unidata.ucar.edu/downloads/udunits/)
-
-- Ncview 1.93g </br>
-``ncview-1.93g.tar.gz`` </br>
-[http://meteora.ucsd.edu/~pierce/ncview_home_page.html](http://meteora.ucsd.edu/~pierce/ncview_home_page.html)
-
-
-#### WRF 4.4 with OpenMPI
-
-Originally, MPICH was used for the WRF installations as the WRF website recommended its use based on their experience. However, we had issues on Slackware 15.0 due to MPICH. First, the latter was not compiling unless the ``-fallow-argument-mismatch`` option was added to ``FFLAGS``. Then, although both WRF and WPS compiled successfully, geogrid.exe was throwing segmentation faults when executed.
-
-Therefore, we decided to adopt OpenMPI, with which WRF and WPS work just fine. Moreover, OpenMPI gives the opportunity to explicitly specify using threads instead of cores when executing a program. For example, when using Intel processors there are hyperthreads available which can be used to launch jobs, analogous to having distinct physical cores. The functionality is used as follows:
-```
-mpirun --use-hwthread-cpus -np [NUM] wrf.exe
-```
-
-## NCAR Graphics & NCL
-
-NCAR Graphics is a library containing Fortran/C applications and utilities used in displaying, editing and manipulating graphical output for scientific visualization. The NCAR Command Language (NCL) is an interpreted language (written in scripts) designed specifically for this purpose. The WPS/utils directory contains NCL scripts, which are very useful to visualize the domains for example.
-
