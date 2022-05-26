@@ -169,3 +169,63 @@ After compilation, everytime WPS or WRF is to be used, the ``env.sh`` script (fo
 ```
 $ source env.sh
 ```
+
+
+## NCAR Graphics & NCL
+
+NCAR Graphics is a library containing Fortran/C applications and utilities used in displaying, editing and manipulating graphical output for scientific visualization. The NCAR Command Language (NCL) is an interpreted language (written in scripts) designed specifically for this purpose. The WPS/util directory contains NCL scripts, which are very useful to visualize the gridded domains for example.
+
+When installing WRF in Slackware 14.2, we provided NCAR graphics and NCL as a utility alongside. The NCL scripts are very useful to visualize set up parameters and data, thus helping to properly set up simulations. We were previously using the pre-compiled binaries for NCAR graphics. However, these binaries do not work in the new Slackware as they were compiled with earlier versions of libgfortran while Slackware 15.0 comes with libgfortran.so.5. Therefore, we now recommend installing NCL as part of a Python environment such as conda ([[https://docs.conda.io](https://docs.conda.io)]([https://docs.conda.io](https://docs.conda.io))).
+
+If you already have a conda installed, you can jump to step 2. Otherwise, we explain how to install a minimal conda environment below.
+
+#### Step 1: install Miniconda
+
+- Go to [https://docs.conda.io/en/latest/miniconda.html](https://docs.conda.io/en/latest/miniconda.html) and browse down to **Linux installers**.
+
+- Get the **Miniconda3 Linux 64-bit** script with **Python 3.9**.
+
+- Be sure to check the integrity of the downloaded script using the SHA256 hash:
+```
+$ sha256sum Miniconda3-py39_${VERSION}-Linux-x86_64.sh
+```
+
+- Run the script:
+```  
+$ chmod +x Miniconda3-py39_${VERSION}-Linux-x86_64.sh
+$ ./Miniconda3-py39_${VERSION}-Linux-x86_64.sh
+```
+
+The latter prompts you at each step of the installation. You need to say "yes" to accept the *license terms* and when it asks to *initialize Miniconda3*. For the installation path you can just press ENTER and Miniconda will be placed under your home directory, e.g. `/home/USERNAME/miniconda3`.
+  
+**NOTE:** after installation, any new terminal which is opened will have conda activated automatically; it will change the prompt visually (usually `(base)` is added at the beginning). Automatic activation on launch is not desirable in a Slackware Linux environment (in my humble opinion) as it will override the system Python. So, we need to disable automatic activation with the following:
+```
+$ conda config --set auto_activate_base false
+```
+The above will create a .condarc script in your home directory to initialize the ``auto_activate_base`` variable with a ``false`` value. The .bashrc script in your home directory will already contain the appropriate paths to activate and run conda at any time. So, each time the conda environment is required, execute the following:
+```
+$ conda activate
+```
+
+#### Step 2: install NCL
+
+NCL is installed in conda as follows. If not yet activated, activate conda:
+```
+$ conda create -n ncl_stable -c conda-forge ncl
+```
+After installation, you can activate the NCL environment as follows
+```
+$ source activate ncl_stable
+```
+Finally, every time a user is to employ NCL, it is recommended to open a new terminal and do the following:
+```
+$ conda activate
+(base) $ source activate ncl_stable
+(ncl_stable) $ 
+```
+Then, for example, to plot the domains set up in WPS, browse to wrfv4/WPS, and execute the following:
+```
+(ncl_stable) $ ncl util/plotgrids_new.ncl
+```
+
+
