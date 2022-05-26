@@ -165,7 +165,7 @@ The WPS directory contains the WRF pre-processor source code and the executable 
 
 #### Running WPS and WRF
 
-After compilation, everytime WPS or WRF is to be used, the ``env.sh`` script (found in the ``OUTPUT`` directory) needs to be sourced. It sets up the proper environment required for the good functioning of WRF.
+After compilation, everytime WPS or WRF is to be used, the ``env.sh`` script (found in the ``wrfv4`` directory) needs to be sourced. It sets up the proper environment required for the good functioning of WRF.
 ```
 $ source env.sh
 ```
@@ -175,7 +175,7 @@ $ source env.sh
 
 NCAR Graphics is a library containing Fortran/C applications and utilities used in displaying, editing and manipulating graphical output for scientific visualization. The NCAR Command Language (NCL) is an interpreted language (written in scripts) designed specifically for this purpose. The WPS/util directory contains NCL scripts, which are very useful to visualize the gridded domains for example.
 
-When installing WRF in Slackware 14.2, we provided NCAR graphics and NCL as a utility alongside. The NCL scripts are very useful to visualize set up parameters and data, thus helping to properly set up simulations. We were previously using the pre-compiled binaries for NCAR graphics. However, these binaries do not work in the new Slackware as they were compiled with earlier versions of libgfortran while Slackware 15.0 comes with libgfortran.so.5. Therefore, we now recommend installing NCL as part of a Python environment such as conda ([[https://docs.conda.io](https://docs.conda.io)]([https://docs.conda.io](https://docs.conda.io))).
+When installing WRF in Slackware 14.2, we provided NCAR graphics and NCL as a utility alongside. The NCL scripts are very useful to visualize set up parameters and data, thus helping to properly set up simulations. We were previously using the pre-compiled binaries for NCAR graphics. However, these binaries do not work in the new Slackware as they were compiled with earlier versions of libgfortran while Slackware 15.0 comes with libgfortran.so.5. Therefore, we now recommend installing NCL as part of a Python environment such as conda ([https://docs.conda.io](https://docs.conda.io)).
 
 If you already have a conda installed, you can jump to step 2. Otherwise, we explain how to install a minimal conda environment below.
 
