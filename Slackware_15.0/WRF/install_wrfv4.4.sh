@@ -205,7 +205,7 @@ mkdir -p $PKG/deps/openmpi
 cd $PKG/build
 tar xvf $CWD/openmpi-${OPENMPI_VER}.tar.bz2
 cd openmpi-${OPENMPI_VER}
-chown -R ${USERID}:${USERID} .
+chown -R ${USERID}:${GROUPID} .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
