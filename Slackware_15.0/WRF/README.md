@@ -209,23 +209,18 @@ $ conda activate
 
 #### Step 2: install NCL
 
-NCL is installed in conda as follows. If not yet activated, activate conda:
+NCL is installed in conda as follows:
 ```
 $ conda create -n ncl_stable -c conda-forge ncl
 ```
-After installation, you can activate the NCL environment as follows
-```
-$ source activate ncl_stable
-```
-Finally, every time a user is to employ NCL, it is recommended to open a new terminal and do the following:
+Then, every time a user is to employ NCL, it is recommended to open a new terminal and do the following:
 ```
 $ conda activate
 (base) $ source activate ncl_stable
-(ncl_stable) $ 
+(ncl_stable) $
 ```
 Then, for example, to plot the domains set up in WPS, browse to wrfv4/WPS, and execute the following:
 ```
 (ncl_stable) $ ncl util/plotgrids_new.ncl
 ```
-
 
