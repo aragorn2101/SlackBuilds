@@ -2,7 +2,7 @@
 
 We propose an installation script for WRF ARW (Advanced Research WRF) on Slackware 15.0. We made use of WRF version 4.4, as opposed to version 4.2.2 previously on 14.2, since it turned out that WRF 4.2.2 presented issues when compiled with GCC 11.x in Slackware 15.0.
 
-**NOTE:** The main requirement is a 64-bit processor and operating system. All the scripts were tested using a 64-bit Slackware 15.0 GNU/Linux installed on an Intel Core i7-7700K machine. Building and installing all the software on that machine takes around 20 minutes. It is expected to take a longer build time on other machines. The final space taken on disk is around 1.1 GB for the software only, and around 30 GB when the geographical static data is included.
+**NOTE:** The main requirement is a 64-bit processor and a GNU/Linux operating system. The installation script was tested using a 64-bit Slackware 15.0 GNU/Linux installed on an Intel Core i7-7700K machine. Building and installing all the software on this machine takes around 20 minutes. It is expected to take a longer build time on lower spec machines. The final space taken on disk is around 1.1 GB for the software only, and around 30 GB when the geographical static data is included.
 
 
 ### WRF
@@ -10,7 +10,7 @@ We propose an installation script for WRF ARW (Advanced Research WRF) on Slackwa
 - WRF 4.4 </br>
 ``v4.4.tar.gz`` </br>
 [https://github.com/wrf-model/WRF/releases](https://github.com/wrf-model/WRF/releases)
-It is important that the archive **v4.4.tar.gz** is downloaded. The link pointed to by *Source code* lack a submodule. A note is attached on the webpage explaining this issue.
+It is important that the archive **v4.4.tar.gz** is downloaded. The link pointed to by *Source code* lack a submodule. A note is attached on the GibHub release page explaining this issue.
 
 WRF is compiled by the script with the ``(dmpar) GNU (gfortran/gcc)`` option. It means that it is compiled for an architecture supporting Dynamic Memory Parallelism using a GNU/Linux operating system. This is implemented usually by the MPI standard on multi-core CPUs. It is option number 34 from the list shown below. This list is obtained by running WRF's internal configure script manually (list is given below).
 ```
