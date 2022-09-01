@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ds9
+GenericName=SAOImageDS9
+Comment=Astronomical Software and FITS viewing program
+Exec=ds9
+Icon=ds9-icon
+Terminal=false
+Type=Application
+Categories=Education;Science;Astronomy;
