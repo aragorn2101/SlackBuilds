@@ -6,9 +6,9 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
               |-----handy-ruler------------------------------------------------------|
-netcdf-fortran: netcdf-fortran
+netcdf-fortran: netcdf-fortran (netCDF Fortran API)
 netcdf-fortran:
-netcdf-fortran: NetCDF (network Common Data Form) is an interface for scientific data
+netcdf-fortran: netCDF (network Common Data Form) is an interface for scientific data
 netcdf-fortran: access and also provides a machine-independent format for
 netcdf-fortran: representing scientific data. The netcdf-fortran package provides
 netcdf-fortran: Fortran application interfaces for accessing netCDF data.
