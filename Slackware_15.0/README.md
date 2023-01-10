@@ -39,7 +39,7 @@ latex2rtf translates the text and as much of the formatting information from LaT
 what you would get from using LaTeX directly.
 
 
-## netcdf-fortran 5.4.5
+## netcdf-fortran 4.5.4
 
 The Unidata network Common Data Form (netCDF) is an interface for scientific data access and a set of freely-distributed software libraries that provide an implementation of the interface. The netCDF library also defines a machine-independent format for representing scientific data. Together, the interface, library, and format support the creation, access, and sharing of scientific data. This software package provides Fortran application interfaces for accessing netCDF data. It depends on the netCDF C library, which must be installed first.
 
