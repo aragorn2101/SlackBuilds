@@ -1,0 +1,10 @@
+The elsarticle package contains the Elsevier article class for LaTeX.
+It also includes some common manuscript templates, associated
+bibliographic/BibTeX styles, and the relevant documentation. The
+package is available on CTAN. The Elsevier article class helps you to
+format the frontmatter of your manuscript properly, when submitting
+your papers to jounals published by Elsevier.
+
+The elsarticle-texcls package wraps up the elsarticle CTAN package for
+Slackware so that the class can be integrated safely into Slacware's
+TeXlive environment safely.
