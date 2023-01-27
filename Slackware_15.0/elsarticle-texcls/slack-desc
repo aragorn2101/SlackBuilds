@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
                  |-----handy-ruler------------------------------------------------------|
+elsarticle-texcls: elsarticle-texcls (LaTeX class)
 elsarticle-texcls:
-elsarticle-texcls:
-elsarticle-texcls:
-elsarticle-texcls:
-elsarticle-texcls:
-elsarticle-texcls:
-elsarticle-texcls:
+elsarticle-texcls: elsarticle is the LaTeX document class for typesetting articles to be
+elsarticle-texcls: submitted to journals published by Elsevier. It is based on the
+elsarticle-texcls: standard article.cls LaTeX class and uses natbib.sty for
+elsarticle-texcls: bibliographical references.
 elsarticle-texcls:
 elsarticle-texcls:
 elsarticle-texcls: https://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle
+elsarticle-texcls:
 elsarticle-texcls:
